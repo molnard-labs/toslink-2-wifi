@@ -1,0 +1,143 @@
+# JBL Wi-Fi audio prototype; tested with ESPHome 2026.9.1 / MA 2.10.8.
+# Hardware: HESTORE ESP32-S3-DEV-N16R8-US + CLIFF FCR684205T (OTJ-5).
+# Wiring: 3V3 -> OTJ pin 2; GND -> pin 1; GPIO4 -> pin 3 (Vin).
+# Place 100 nF ceramic capacitor between OTJ pins 2 and 1, within 7 mm.
+# Verify the actual part against the manufacturer's drawing before power-on.
+# https://www.cliffuk.co.uk/products/optical/FCR684205T.pdf
+# Separate regulated 5 V USB supply for ESP32. No external DAC is needed.
+#
+# Initial integration: ESPHome -> HA native player -> MA Home Assistant provider.
+# Advertises FLAC / 48000 Hz / stereo; verify MA uses these capabilities.
+# Target decoded audio is 16 bit. Modern MA may configure formats automatically.
+# This firmware is not a Google Cast, DLNA or Windows audio-driver endpoint.
+# Windows system audio: Voicemeeter/VBAN -> MA VBAN Receiver -> this player.
+# Android: MA UI, or experimental AriaCast (apps can prohibit audio capture).
+# YouTube Music: MA provider, not the native YouTube Music Cast receiver list.
+#
+# JBL: select TV source once; no HDMI is attached in the planned setup.
+# Optical auto-wake / standby and first-track delay require a hardware test.
+# timeout is deliberately finite: permanent SPDIF silence may keep JBL awake.
+# The HA player state reports ESP32 playback, not the JBL power/input state.
+#
+# Fill secrets.yaml from secrets.example.yaml before validation/build/upload.
+# Build with ESPHome 2026.9.1 first; validate upgrades separately.
+# Compiled and uploaded with ESPHome 2026.9.1 on 2026-10-29.
+# Optical music and PC audio were heard on the JBL. Auto-wake and latency
+# have not been measured or verified.
+
+esphome:
+  name: jbl-wifi
+  friendly_name: JBL
+  min_version: 2026.9.1
+
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16MB
+  cpu_frequency: 240MHz
+  framework:
+    type: esp-idf
+
+psram:
+  mode: octal
+  speed: 80MHz
+  ignore_not_found: false
+
+logger:
+  level: INFO
+
+api:
+  encryption:
+    key: !secret jbl_api_encryption_key
+  reboot_timeout: 0s
+
+ota:
+  - platform: esphome
+    password: !secret jbl_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  power_save_mode: none
+
+light:
+  - platform: esp32_rmt_led_strip
+    id: onboard_rgb
+    name: RGB
+    pin: GPIO48
+    num_leds: 1
+    chipset: WS2812
+    channel_colors: GRB
+    restore_mode: ALWAYS_OFF
+
+i2s_audio:
+  - id: digital_audio_bus
+
+speaker:
+  - platform: i2s_audio
+    id: optical_output
+    i2s_audio_id: digital_audio_bus
+    dac_type: external
+    i2s_dout_pin: GPIO4
+    spdif_mode: true
+    use_apll: true
+    i2s_mode: primary
+    i2s_comm_fmt: stand_i2s
+    mclk_multiple: 256
+    sample_rate: 48000
+    bits_per_sample: 16bit
+    channel: stereo
+    buffer_duration: 500ms
+    timeout: 2s
+
+  - platform: mixer
+    id: audio_mixer
+    output_speaker: optical_output
+    task_stack_in_psram: true
+    source_speakers:
+      - id: music_mixer_input
+      - id: announcement_mixer_input
+
+  - platform: resampler
+    id: music_input
+    output_speaker: music_mixer_input
+    bits_per_sample: 16
+    task_stack_in_psram: true
+
+  - platform: resampler
+    id: announcement_input
+    output_speaker: announcement_mixer_input
+    bits_per_sample: 16
+    task_stack_in_psram: true
+
+media_player:
+  - platform: speaker
+    id: jbl_player
+    name: WiFi
+    volume_initial: 25%
+    buffer_size: 1000000
+    task_stack_in_psram: true
+    media_pipeline:
+      speaker: music_input
+      format: FLAC
+      sample_rate: 48000
+      num_channels: 2
+    announcement_pipeline:
+      speaker: announcement_input
+      format: FLAC
+      sample_rate: 48000
+      num_channels: 2
+
+sensor:
+  - platform: wifi_signal
+    name: WiFi signal
+    update_interval: 60s
+    entity_category: diagnostic
+  - platform: uptime
+    name: Uptime
+    entity_category: diagnostic
+
+button:
+  - platform: restart
+    name: Restart
+    entity_category: diagnostic
