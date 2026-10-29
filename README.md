@@ -1,5 +1,7 @@
 # TOSLINK 2 Wi-Fi
 
+![TOSLINK 2 Wi-Fi device and key features](promo.png)
+
 An ESPHome-based Wi-Fi audio endpoint for a soundbar or amplifier with an optical S/PDIF input. Built for a JBL Bar 2.1 Deep Bass, which has no analog AUX input, using an ESP32-S3 and a CLIFF OTJ-5 optical transmitter.
 
 **Status: working prototype.** Home Assistant announcements, Music Assistant audio, the onboard RGB LED, YouTube Music through Music Assistant, and Windows audio through VBAN were heard on the JBL. End-to-end video synchronization and automatic wake/input selection have **not** been measured or established.
