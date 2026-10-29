@@ -1,0 +1,8 @@
+firmware/secrets.yaml
+firmware/.esphome/
+firmware/.pioenvs/
+firmware/.piolibdeps/
+*.log
+*.bin
+*.elf
+.DS_Store
