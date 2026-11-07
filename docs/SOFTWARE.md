@@ -22,7 +22,7 @@ If you temporarily provision a friend's device on your own network for testing, 
 
 ## Adopt and secure the device
 
-After connecting the bridge to the owner's Wi-Fi, look for the discovered device in ESPHome Device Builder and choose **Adopt**. The firmware advertises the project's full configuration for import so the owner can edit the imported copy locally. This specific adoption and the first update after adoption have not yet been tested on the new device; a same-configuration OTA update preserved provisioned Wi-Fi during the earlier prototype test.
+After connecting the bridge to the owner's Wi-Fi, look for the discovered device in ESPHome Device Builder and choose **Take control** (adoption). The firmware advertises the project's full configuration for import so the owner can edit the imported copy locally. The first production unit appeared for discovery; adoption and the first update after adoption have not yet been tested, though a same-configuration OTA update preserved provisioned Wi-Fi during the earlier prototype test.
 
 The owner can later add [API encryption](https://esphome.io/components/api/) and an [ESPHome OTA password](https://esphome.io/components/ota/esphome/) in that configuration and install the updated firmware. Keep those secrets private; the Home Assistant integration may need reconfiguration with the new API key when encryption is enabled. These protections do not add a password to the separate captive portal upload path.
 

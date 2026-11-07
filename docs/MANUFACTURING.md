@@ -42,11 +42,11 @@ The setup access point is open, including the captive portal's firmware-upload f
 
 ## 4. Optional Device Builder adoption
 
-Once connected, the device may be offered for **Adopt** in ESPHome Device Builder. The screenshot below is a redacted illustration from the earlier prototype, not proof that a newly built unit has been discovered. This interface was captured in Hungarian; labels vary with language and version.
+Once connected, the device may be offered for **Take control** (adoption) in ESPHome Device Builder. The screenshot below shows the first production unit with its identifying suffix redacted. Labels may vary by version.
 
 ![Redacted example of an ESPHome device offered for adoption](images/esphome-discovery-redacted.jpg)
 
-Automatic Device Builder discovery and adoption have not yet been verified for every network or unit. If the device is not offered, Device Builder also provides manual configuration creation or file import:
+The first production unit was discovered, but the complete adoption and first update have not yet been verified. If the device is not offered, Device Builder also provides manual configuration creation or file import:
 
 ![ESPHome configuration creation dialog showing file import and blank configuration choices](images/esphome-manual-import.jpg)
 
