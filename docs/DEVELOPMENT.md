@@ -38,7 +38,7 @@ Prototype testing on 2026-10-29: ESPHome 2026.9.1 firmware compiled and flashed;
 
 Not verified: objective end-to-end latency, lip sync, long-term dropouts and stability, unattended recovery, JBL optical auto-wake/input selection, or reproducibility on other board revisions. Do not infer these from the successful audio test.
 
-On 2026-11-07, the generic configuration passed ESPHome 2026.9.1 validation and compilation and was flashed and verified over USB on a separate ESP32-S3 with 16 MB flash and 8 MB PSRAM. Initial AP provisioning, wrong-password recovery, Wi-Fi outage behavior, persistent credentials after power cycles and firmware updates, simultaneous devices, Home Assistant discovery and physical sound output still require verification on new hardware. The prototype's earlier results do not demonstrate these new behaviors.
+On 2026-11-07, the generic configuration passed ESPHome 2026.9.1 validation and compilation and was flashed and verified over USB on a separate ESP32-S3 with 16 MB flash and 8 MB PSRAM. The owner opened the setup portal over its open AP. After an intentionally incorrect Wi-Fi password, the setup network remained reachable; after entering the correct one, the bridge connected, Home Assistant discovered it, and an encrypted ESPHome API session listed its media player and RGB light. Wi-Fi outage behavior, persistent credentials after power cycles and firmware updates, simultaneous devices and physical sound output still require verification on new hardware. The prototype's earlier results do not demonstrate these new behaviors.
 
 ## Development workflow
 
