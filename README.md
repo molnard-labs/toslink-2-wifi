@@ -27,6 +27,7 @@ The files in `firmware/` are the complete project-specific firmware configuratio
 
 ## Documentation
 
+- [Manufacturing, flashing and first setup](docs/MANUFACTURING.md)
 - [Hardware, bill of materials and wiring](docs/HARDWARE.md)
 - [ESPHome, Home Assistant and Music Assistant setup](docs/SOFTWARE.md)
 - [Windows/MPC-HC and VBAN](docs/WINDOWS.md)
