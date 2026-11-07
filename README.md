@@ -17,11 +17,11 @@ This is an ESPHome/Home Assistant media player, not a native Windows audio endpo
 
 1. Gather the parts and wire the transmitter as described in [Hardware and assembly](docs/HARDWARE.md). Check the actual pin orientation against the linked manufacturer drawing **before applying power**.
 2. Prepare unique API encryption and OTA credentials for each new device and keep them private. The new configuration does not contain the builder's Wi-Fi credentials; see [Software setup](docs/SOFTWARE.md).
-3. Use ESPHome Device Builder or ESPHome **2026.9.1** to validate, compile and initially flash [`firmware/optical-audio-bridge.yaml`](firmware/optical-audio-bridge.yaml). The existing [`firmware/jbl-wifi.yaml`](firmware/jbl-wifi.yaml) remains available for the original JBL prototype.
+3. Use ESPHome Device Builder or ESPHome **2026.9.1** to validate, compile and initially flash the private per-device configuration created from [`firmware/optical-audio-bridge.yaml`](firmware/optical-audio-bridge.yaml). The existing [`firmware/jbl-wifi.yaml`](firmware/jbl-wifi.yaml) remains available for the original JBL prototype.
 4. Connect your phone to the device's open setup Wi-Fi, open its portal or `http://192.168.4.1/`, and enter your own 2.4 GHz Wi-Fi credentials. Add it to Home Assistant with its API key; for music, select its Home Assistant player in Music Assistant.
 5. Connect the optical output to a compatible device and select its optical input. Start at moderate volume. The RGB light starts off at reboot. For Windows audio follow [Windows and VBAN](docs/WINDOWS.md).
 
-The generic setup and open access-point recovery require testing on new hardware. The captive portal is open to anyone nearby while active and includes firmware upload functionality; avoid activating it on an untrusted network. The existing JBL playback tests do not establish that first-time provisioning, recovery or OTA credential persistence work on the new configuration.
+Initial setup, wrong-password recovery, an OTA update and a power cycle have been tested on a separate generic unit; its optical audio output has not yet been tested. The captive portal is open to anyone nearby while active and includes firmware upload functionality; set it up in a trusted location. See the [verification record](docs/DEVELOPMENT.md#verification-record) for details and remaining tests.
 
 The files in `firmware/` are the complete project-specific firmware configuration: there is no custom component to install. ESPHome itself generates the compiled firmware from this configuration and its upstream components. The working configuration uses GPIO4 for S/PDIF and GPIO48 for the board's WS2812-compatible RGB LED.
 

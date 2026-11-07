@@ -19,6 +19,8 @@ The new firmware is configured with an **open setup access point** and no baked-
 
 The portal stores credentials on the device. ESPHome notes that flashing firmware by serial can overwrite Wi-Fi settings; test credential persistence after OTA or USB updates rather than assuming it. See the [official captive portal documentation](https://esphome.io/components/captive_portal/).
 
+If you temporarily provision a friend's device on your own network for testing, remove those credentials before handover. An ordinary firmware upload is not a reliable factory reset. On the tested ESP32-S3 build, the Wi-Fi settings are in the NVS partition: a targeted NVS erase over USB resets all saved preferences but leaves the firmware and its compiled API/OTA credentials intact. Identify the correct board and read and decode its actual partition table before erasing; offsets can differ across builds. Afterward, confirm that the open setup AP and portal return. Keep the owner's per-device credentials separate and private.
+
 ## Home Assistant and Music Assistant
 
 1. In Home Assistant, add the discovered ESPHome device, or add it by its IP address if discovery fails. Supply that device's API encryption key. Check its media player, RGB light and diagnostic entities; rename or assign it to a room in Home Assistant as needed.
