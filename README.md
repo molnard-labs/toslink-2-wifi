@@ -1,5 +1,7 @@
 # Optical Audio Bridge
 
+[Watch the build and demo on YouTube](https://youtu.be/g6qAkxSKtlw)
+
 ![Original prototype promotional graphic, using the former TOSLINK 2 Wi-Fi name](promo.png)
 
 An ESPHome-based Wi-Fi audio endpoint for a soundbar or amplifier with an optical S/PDIF input. Built for a JBL Bar 2.1 Deep Bass, which has no analog AUX input, using an ESP32-S3 and a CLIFF OTJ-5 optical transmitter.
