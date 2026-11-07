@@ -1,11 +1,12 @@
 # Production 01 firmware build record
 
-This is the first production-unit build record, not a GitHub Release. Physical flash and hardware verification are still pending.
+This is the first production-unit build record, not a GitHub Release. On 2026-11-07 the factory image below was written over USB and verified on an ESP32-S3 with 16 MB flash and 8 MB PSRAM. First-boot provisioning and the remaining physical checks are still pending.
 
 - Source commit: `1f2ccfa5a4c5ec82aa2dd2caf05ad0c6fb6c6f81`.
 - Manufacturing tag / Device Builder import ref: `manufacturing-2026-11-07-01` (points to the source commit above).
 - Project version in ESPHome: `1.0.0`.
 - Toolchain used: ESPHome `2026.9.1`, ESP-IDF `5.5.5`, Xtensa GCC `14.2.0`; component versions and hashes: [dependencies.lock](production-01-dependencies.lock).
+- USB flashing and write verification: `esptool` `5.3.1`, native ESP32-S3 USB serial/JTAG.
 - Build time recorded in binary: `2026-11-07 11:14:59 +0100`.
 - Committed YAML SHA-256: `5b00ef4366361e3eb4dad33f2f32de8dc7e19aa2e9482eab6b2a1aa78b96a432`.
 - Build-copy YAML SHA-256: `d46c875623ab0fbb8236e0cdf4a21dddf748d51db7d54fbe504dacfbba21e962` (the copy has Windows CRLF endings; its contents match the committed YAML after normalizing line endings).
