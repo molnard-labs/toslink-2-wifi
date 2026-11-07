@@ -26,6 +26,21 @@ After connecting the bridge to the owner's Wi-Fi, look for the discovered device
 
 The owner can later add [API encryption](https://esphome.io/components/api/) and an [ESPHome OTA password](https://esphome.io/components/ota/esphome/) in that configuration and install the updated firmware. Keep those secrets private; the Home Assistant integration may need reconfiguration with the new API key when encryption is enabled. These protections do not add a password to the separate captive portal upload path.
 
+For example, after adoption replace the existing `api:` and `ota:` blocks in the local configuration with:
+
+```yaml
+api:
+  reboot_timeout: 0s
+  encryption:
+    key: !secret optical_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret optical_ota_password
+```
+
+Put a unique base64-encoded 32-byte API key and a unique OTA password under those names in Device Builder's private `secrets.yaml`. For example, `openssl rand -base64 32` generates an API key. Install the edited configuration; the first update uses the old unprotected OTA settings. Never commit either value to a public repository.
+
 ## Home Assistant and Music Assistant
 
 1. In Home Assistant, add the discovered ESPHome device, or add it by its IP address if discovery fails. The generic default does not require an API encryption key. Check its media player, RGB light and diagnostic entities; rename or assign it to a room in Home Assistant as needed.
