@@ -29,6 +29,7 @@ Prebuilt factory and OTA binaries for the first production firmware, together wi
 
 ## Documentation
 
+- [Magyar üzembe helyezési útmutató / Hungarian user setup guide (PDF)](docs/hu/optical-audio-bridge-uzembe-helyezes.pdf)
 - [Manufacturing, flashing and first setup](docs/MANUFACTURING.md)
 - [Hardware, bill of materials and wiring](docs/HARDWARE.md)
 - [ESPHome, Home Assistant and Music Assistant setup](docs/SOFTWARE.md)
