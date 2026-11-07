@@ -15,7 +15,7 @@ esphome:
     version: 1.0.0
 
 dashboard_import:
-  package_import_url: github://molnard-labs/toslink-2-wifi/firmware/optical-audio-bridge.yaml@main
+  package_import_url: github://molnard-labs/toslink-2-wifi/firmware/optical-audio-bridge.yaml@manufacturing-2026-11-07-01
   import_full_config: true
 
 esp32:

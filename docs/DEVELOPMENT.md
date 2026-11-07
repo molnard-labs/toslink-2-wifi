@@ -44,6 +44,8 @@ The subsequent unauthenticated generic configuration passed ESPHome 2026.9.1 val
 
 ## Development workflow
 
+The first production build uses the Git tag `manufacturing-2026-11-07-01` as its source baseline and Device Builder import reference. This tag identifies a source commit; it is not a GitHub Release. Do not move it after manufacturing. Use a new tag for later firmware changes, and record the actual compiled binary hashes and dependency versions separately; build timestamps and toolchain changes can produce different binaries from the same source.
+
 The optional per-device configuration copies are kept in the ignored `firmware/private-devices/` directory; the original JBL configuration uses an ignored `firmware/secrets.yaml`. If adding credentials later, keep them out of the repository and share them privately with the owner. Build changes against the tested ESPHome version first; validate and compile, check ESPHome logs, and verify the physical output and LED after firmware changes. Back up the known-good configuration before OTA upgrades. Changes to the audio pipeline must be tested with announcements and music, restart/reconnect, and any Windows path they affect. Treat memory/buffer values as engineering tradeoffs and measure latency and packet loss before making performance claims.
 
 For latency evaluation, use a known synchronized flash/click video and capture the screen and soundbar together with a camera or a shared measurement setup; report repetitions, direction of offset and method. A single anecdotal observation is not a measurement. Compare directly against the existing Bluetooth setup if relevant.
