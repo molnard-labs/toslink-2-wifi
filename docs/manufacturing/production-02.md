@@ -6,6 +6,6 @@ The second unit is a previously tested ESP32-S3 board with 16 MB flash and 8 MB 
 - Factory binary SHA-256: `74519098ed238cd871fc39b37398dd6632e024b0438ba120d831baf5eba2e1f3`.
 - USB flashing and write verification: `esptool` `5.3.1` using the board's USB-to-serial interface.
 - The flash operation wrote the factory image but did not erase the NVS settings partition. An earlier reset of this board had returned it to setup mode; the settings present at the time of this flash were not independently checked.
-- The temporary Home Assistant integration was removed after the tests. Test Wi-Fi credentials remain on the unit until its NVS settings are reset before handover.
+- The temporary Home Assistant integration was removed after the tests. The verified NVS partition was erased over USB to remove test Wi-Fi credentials; confirmation that the setup portal returned is pending.
 
 See [Production 01](production-01.md) for the build toolchain, component lock and OTA binary hash. The first unit's tests do not by themselves prove the second unit's optical output or network behavior.
