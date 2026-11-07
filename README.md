@@ -21,9 +21,11 @@ This is an ESPHome/Home Assistant media player, not a native Windows audio endpo
 4. Connect your phone to the device's open setup Wi-Fi, open its portal or `http://192.168.4.1/`, and enter your own 2.4 GHz Wi-Fi credentials. Add it to Home Assistant; for music, select its Home Assistant player in Music Assistant.
 5. Connect the optical output to a compatible device and select its optical input. Start at moderate volume. The RGB light starts off at reboot. For Windows audio follow [Windows and VBAN](docs/WINDOWS.md).
 
-Initial setup, wrong-password recovery, an OTA update and a power cycle have been tested on a separate generic unit using the earlier encrypted configuration; its optical audio output and the new unauthenticated configuration still need physical verification. The default API is unencrypted and OTA has no password: anyone with network access can control the device and upload firmware. The setup AP and its firmware-upload portal are also open to anyone nearby while active. Use a trusted network and see [Software setup](docs/SOFTWARE.md) for ways to add security. See the [verification record](docs/DEVELOPMENT.md#verification-record) for details and remaining tests.
+The first assembled generic unit passed setup, Home Assistant speech and Music Assistant optical playback, RGB and OTA tests. Device Builder discovery worked; adoption and the first update after adoption remain untested. The default API is unencrypted and OTA has no password: anyone with network access can control the device and upload firmware. The setup AP and its firmware-upload portal are also open to anyone nearby while active. Use a trusted network and see [Software setup](docs/SOFTWARE.md) for ways to add security. See the [verification record](docs/DEVELOPMENT.md#verification-record) for details and remaining tests.
 
 The files in `firmware/` are the complete project-specific firmware configuration: there is no custom component to install. ESPHome itself generates the compiled firmware from this configuration and its upstream components. The working configuration uses GPIO4 for S/PDIF and GPIO48 for the board's WS2812-compatible RGB LED.
+
+Prebuilt factory and OTA binaries for the first production firmware, together with SHA-256 checksums, are available in [Release v1.0.0](https://github.com/molnard-labs/toslink-2-wifi/releases/tag/v1.0.0). See the [manufacturing guide](docs/MANUFACTURING.md) before flashing a board.
 
 ## Documentation
 

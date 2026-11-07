@@ -1,6 +1,6 @@
 # Software setup
 
-The original JBL prototype was tested with ESPHome **2026.9.1**, ESP-IDF, 16 MB flash, 8 MB octal PSRAM and Music Assistant **2.10.8**. The new generic firmware and its onboarding flow require separate hardware verification. Other software versions may work but should be validated separately; `min_version` does not pin ESPHome.
+The original JBL prototype was tested with ESPHome **2026.9.1**, ESP-IDF, 16 MB flash, 8 MB octal PSRAM and Music Assistant **2.10.8**. The first assembled generic unit also passed setup, RGB, Home Assistant speech, Music Assistant optical audio and OTA tests; see the [production build record](manufacturing/production-01.md). Other software versions may work but should be validated separately; `min_version` does not pin ESPHome.
 
 ## Prepare each new device
 
@@ -22,7 +22,7 @@ If you temporarily provision a friend's device on your own network for testing, 
 
 ## Adopt and secure the device
 
-After connecting the bridge to the owner's Wi-Fi, look for the discovered device in ESPHome Device Builder and choose **Take control** (adoption). The firmware advertises the project's full configuration for import so the owner can edit the imported copy locally. The first production unit appeared for discovery; adoption and the first update after adoption have not yet been tested, though a same-configuration OTA update preserved provisioned Wi-Fi during the earlier prototype test.
+After connecting the bridge to the owner's Wi-Fi, look for the discovered device in ESPHome Device Builder and choose **Take control** (adoption). The firmware advertises the project's full configuration for import so the owner can edit the imported copy locally. The first production unit appeared for discovery; adoption and the first update after adoption have not yet been tested. An OTA upload of the same firmware preserved provisioned Wi-Fi on the first production unit.
 
 The owner can later add [API encryption](https://esphome.io/components/api/) and an [ESPHome OTA password](https://esphome.io/components/ota/esphome/) in that configuration and install the updated firmware. Keep those secrets private; the Home Assistant integration may need reconfiguration with the new API key when encryption is enabled. These protections do not add a password to the separate captive portal upload path.
 

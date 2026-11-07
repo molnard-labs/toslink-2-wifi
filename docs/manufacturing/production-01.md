@@ -13,6 +13,6 @@ This is the first production-unit build record, not a GitHub Release. On 2026-11
 - Factory binary SHA-256: `74519098ed238cd871fc39b37398dd6632e024b0438ba120d831baf5eba2e1f3`.
 - OTA binary SHA-256: `c4a485e884f09dc533902aca1bc88d2077c4542ccac5b80e47adc7ba384ab4e7`.
 
-The two binaries and their build metadata are archived locally under the ignored `firmware/private-devices/production-01-20261107/archive/` directory for a potential later release. They do not include a configured station Wi-Fi network, API key or OTA password. A build timestamp and environmental differences mean that rebuilding the same source may not yield byte-identical artifacts; verify the hashes when distributing these exact binaries.
+The exact binaries are included as assets in the `v1.0.0` release and are also archived locally under the ignored `firmware/private-devices/production-01-20261107/archive/` directory. They do not include a configured station Wi-Fi network, API key or OTA password. A build timestamp and environmental differences mean that rebuilding the same source may not yield byte-identical artifacts; verify the hashes when distributing these exact binaries.
 
 The setup access point and captive portal are open, and the default network API and OTA have no authentication. See [Software setup](../SOFTWARE.md) for the implications and optional protection.
