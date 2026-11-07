@@ -2,7 +2,7 @@
 
 ## Problem and goals
 
-The JBL Bar 2.1 Deep Bass accepts digital optical input but lacks AUX. The project adds Wi-Fi playback, Home Assistant and Music Assistant control, and an addressable status/ambient LED. The prototype was also tested with Windows film audio, without claiming low latency. The aim is a reproducible hobby build rather than a production-ready, certified appliance.
+Optical Audio Bridge adds Wi-Fi playback to a soundbar or amplifier with an optical input, with Home Assistant and Music Assistant control and an addressable LED. The original prototype used a JBL Bar 2.1 Deep Bass, which lacks AUX. Windows film audio was also heard on that prototype, without establishing low latency. The aim is a reproducible hobby build rather than a production-ready, certified appliance.
 
 ## Architecture
 
@@ -30,6 +30,7 @@ The 500 ms speaker buffer and 1 MB media-player buffer favor stability over mini
 - **Music Assistant for services:** one controller and library, including the unofficial YouTube Music provider; a Google Cast receiver is not implemented. YouTube Music account cookies can expire and playback can fail independently of the ESP.
 - **VBAN through Music Assistant for PC audio:** an existing provider and Windows sender gave a working proof of concept without adding a custom ESP component. It requires a sender on each Windows machine and can introduce significant buffering. It is not a direct, low-latency ESP32 VBAN receiver.
 - **No automatic JBL controls:** no verified optical wake/source control or separate power-control interface is implemented. Select TV and power manually until behavior is tested.
+- **Separate onboarding configuration:** new generic units use an ESPHome setup AP and captive portal without the builder's Wi-Fi credentials. The AP is deliberately open for ease of setup; anyone nearby can access the setup portal while it is active, including its firmware upload function. API and OTA credentials are generated independently per device. The original JBL configuration remains available and is not migrated automatically.
 
 ## Verification record
 
@@ -37,9 +38,11 @@ Prototype testing on 2026-10-29: ESPHome 2026.9.1 firmware compiled and flashed;
 
 Not verified: objective end-to-end latency, lip sync, long-term dropouts and stability, unattended recovery, JBL optical auto-wake/input selection, or reproducibility on other board revisions. Do not infer these from the successful audio test.
 
+On 2026-11-07, the generic configuration passed ESPHome 2026.9.1 validation and compilation and was flashed and verified over USB on a separate ESP32-S3 with 16 MB flash and 8 MB PSRAM. Initial AP provisioning, wrong-password recovery, Wi-Fi outage behavior, persistent credentials after power cycles and firmware updates, simultaneous devices, Home Assistant discovery and physical sound output still require verification on new hardware. The prototype's earlier results do not demonstrate these new behaviors.
+
 ## Development workflow
 
-Keep credentials in an ignored `firmware/secrets.yaml`. Build changes against the tested ESPHome version first; validate and compile, check generated ESPHome logs, and verify the physical output and LED after firmware changes. Back up the known-good configuration before OTA upgrades. Changes to the audio pipeline must be tested with announcements and music, restart/reconnect, and any Windows path they affect. Treat memory/buffer values as engineering tradeoffs and measure latency and packet loss before making performance claims.
+Keep the generated per-device credentials in the ignored `firmware/private-devices/` directory; the original JBL configuration uses an ignored `firmware/secrets.yaml`. Build changes against the tested ESPHome version first; validate and compile, check ESPHome logs, and verify the physical output and LED after firmware changes. Back up the known-good configuration before OTA upgrades. Changes to the audio pipeline must be tested with announcements and music, restart/reconnect, and any Windows path they affect. Treat memory/buffer values as engineering tradeoffs and measure latency and packet loss before making performance claims.
 
 For latency evaluation, use a known synchronized flash/click video and capture the screen and soundbar together with a camera or a shared measurement setup; report repetitions, direction of offset and method. A single anecdotal observation is not a measurement. Compare directly against the existing Bluetooth setup if relevant.
 

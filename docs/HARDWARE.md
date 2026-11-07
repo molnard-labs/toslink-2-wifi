@@ -29,7 +29,7 @@ ESP32-S3 3V3 ───────────┬───── OTJ-5 pin 2 (VC
 ESP32-S3 GND ───────────┴───── OTJ-5 pin 1 (GND)
 ESP32-S3 GPIO4 ─────────────── OTJ-5 pin 3 (VIN)
                                   │ optical cable
-                                  └──────────► JBL OPTICAL IN
+                                  └──────────► SOUND SYSTEM OPTICAL IN
 ```
 
 The capacitor is connected **between VCC and GND**, not between VCC and itself. Check its two ends against the pin table. The transmitter has its own drive circuitry; the GPIO supplies a logic-level S/PDIF signal rather than driving the LED directly. The specified operating supply is 2.7–5.5 V and the input high threshold is 2.0 V; powering it from the board's 3.3 V rail makes the 3.3 V ESP32 logic interface appropriate. These limits apply to the specified OTJ-5, not arbitrary optical modules. Observe the data sheet's ESD and soldering guidance.
@@ -40,8 +40,8 @@ Power off before wiring; confirm 3V3/GND/VIN and check for shorts with a meter. 
 
 The tested board has one WS2812-compatible addressable LED on GPIO48, configured for GRB order. Board variants may differ. If the LED does not respond, check the board's RGB solder bridge/jumper and its documentation before changing the GPIO or color order. The tested board displayed red, green and blue correctly.
 
-## Soundbar
+## Soundbar or amplifier
 
-Use the JBL **TV** source for optical input. This build has no HDMI connection to a TV, so HDMI ARC source priority was not tested. Optical auto-wake, standby behavior, source selection on wake and loss of the beginning of a track remain unverified; the firmware does not control JBL power or its input. A Home Assistant player state describes the ESP, not the physical JBL state.
+Select the receiving device's optical input. On the tested JBL Bar 2.1 Deep Bass, use the **TV** source. That build has no HDMI connection to a TV, so HDMI ARC source priority was not tested. Optical auto-wake, standby behavior, source selection on wake and loss of the beginning of a track remain unverified; the firmware does not control the receiver's power or input. A Home Assistant player state describes the ESP, not the physical soundbar or amplifier. Other receivers and their supported audio formats have not been tested.
 
 See [Enclosure](../enclosure/README.md) for the local printable adaptation and redistribution restrictions. No PCB or fabrication Gerbers are supplied; this prototype is point-to-point wiring, so the pin table and data sheet are the assembly reference.

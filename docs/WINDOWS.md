@@ -14,7 +14,7 @@ To send other applications, choose Voicemeeter Input for them in the Windows vol
 ## Configure Music Assistant
 
 1. Add the **VBAN Receiver** plugin. Set UDP port `6980`, stream name `JBLPC`, signed 16-bit little-endian PCM, 48000 Hz, 2 channels, and the sender IP **as observed by the Music Assistant host**.
-2. In Music Assistant, select **JBL WiFi** as the player and choose **Browse → VBAN Receiver: JBLPC**. A sender must be actively transmitting. See the [official plugin documentation](https://www.music-assistant.io/plugins/vban-receiver/).
+2. In Music Assistant, select the bridge's Home Assistant player (the original prototype was named **JBL WiFi**) and choose **Browse → VBAN Receiver: JBLPC**. A sender must be actively transmitting. See the [official plugin documentation](https://www.music-assistant.io/plugins/vban-receiver/).
 3. If packets do not arrive, check the sender's ON state, B1 routing, server address, port, local firewall and receiver settings. On the tested network, the packets arrived with a different source IP than the PC's LAN address, so the receiver had to be configured with the observed source address. This may depend on routing or NAT; do not assume the same address in another installation.
 
 For a second laptop, install/configure a VBAN sender on that laptop and update the receiver's sender IP. Alternatively create another receiver instance with its own UDP port and matching sender settings, if supported by the sender. The tested Voicemeeter version used port 6980; check your sender's actual port configuration before relying on multiple instances.

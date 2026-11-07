@@ -1,4 +1,5 @@
 firmware/secrets.yaml
+/firmware/private-devices/
 firmware/.esphome/
 firmware/.pioenvs/
 firmware/.piolibdeps/
