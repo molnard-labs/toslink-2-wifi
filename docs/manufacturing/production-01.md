@@ -1,6 +1,6 @@
 # Production 01 firmware build record
 
-This is the first production-unit build record, not a GitHub Release. On 2026-11-07 the factory image below was written over USB and verified on an ESP32-S3 with 16 MB flash and 8 MB PSRAM. First-boot provisioning and the remaining physical checks are still pending.
+This is the first production-unit build record, not a GitHub Release. On 2026-11-07 the factory image below was written over USB and verified on an ESP32-S3 with 16 MB flash and 8 MB PSRAM. The assembled unit opened its setup portal, joined the test Wi-Fi, appeared in Home Assistant and ESPHome Device Builder, and displayed red, green and blue on its LED. The user heard a Google Translate text-to-speech announcement and a Music Assistant sample through the optical output. An OTA upload of the archived OTA binary succeeded and the unit reconnected afterward. The temporary Home Assistant and Music Assistant entries were removed after testing. The unit's verified NVS partition was erased over USB to remove test Wi-Fi settings; confirmation that the setup portal returned is pending. Device Builder adoption and the first update after adoption were not tested.
 
 - Source commit: `1f2ccfa5a4c5ec82aa2dd2caf05ad0c6fb6c6f81`.
 - Manufacturing tag / Device Builder import ref: `manufacturing-2026-11-07-01` (points to the source commit above).
