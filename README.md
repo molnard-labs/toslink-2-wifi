@@ -1,6 +1,6 @@
 # Optical Audio Bridge
 
-[Watch the build and demo on YouTube](https://youtu.be/g6qAkxSKtlw)
+[Watch the build and demo on YouTube](https://youtu.be/HPYbRE1Dvtk)
 
 ![Original prototype promotional graphic, using the former TOSLINK 2 Wi-Fi name](promo.png)
 
